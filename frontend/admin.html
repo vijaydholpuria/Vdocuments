@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<title>Admin Dashboard — V Doc</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./css/style.css">
+<link rel="stylesheet" href="./css/admin.css">
+</head>
+<body>
+
+<div class="page-loader"><div class="spinner"></div><p>Loading dashboard…</p></div>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<div class="admin-shell">
+  <aside class="sidebar glass" id="sidebar">
+    <div class="sidebar-brand"><span class="logo-mark" data-site-logo>VD</span><span data-site-name>V Doc</span></div>
+
+    <div class="sidebar-section-label">Menu</div>
+    <a href="#" class="side-link active" data-view="dashboard">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
+      Dashboard
+    </a>
+    <a href="#" class="side-link" data-view="upload">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M17 8l-5-5-5 5"/><path d="M12 3v12"/></svg>
+      Upload File
+    </a>
+    <a href="#" class="side-link" data-view="files">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+      Manage Files
+    </a>
+    <a href="#" class="side-link" data-view="categories">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h6l2 2h8v12H4z"/></svg>
+      Categories
+    </a>
+    <a href="#" class="side-link" data-view="settings">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      Settings
+    </a>
+
+    <div class="sidebar-footer">
+      <a href="./index.html" class="side-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>View Site</a>
+      <a href="#" class="side-link" id="logoutBtn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg>Logout</a>
+    </div>
+  </aside>
+
+  <div class="admin-main">
+    <header class="admin-topbar">
+      <div class="topbar-left">
+        <button class="icon-btn sidebar-toggle" id="sidebarToggle" aria-label="Toggle menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+        </button>
+        <h1 id="pageTitle">Dashboard</h1>
+      </div>
+      <div class="topbar-right">
+        <div class="topbar-stat"><div class="num" id="topStorage">—</div><div class="label">Storage used</div></div>
+        <div class="topbar-stat"><div class="num" id="topDownloads">—</div><div class="label">Downloads</div></div>
+        <button class="icon-btn" data-theme-toggle aria-label="Toggle dark mode"></button>
+        <button class="icon-btn" aria-label="Notifications">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        </button>
+        <div class="avatar" id="avatarInitial">A</div>
+      </div>
+    </header>
+
+    <div class="admin-content">
+
+      <!-- ===== Dashboard view ===== -->
+      <section class="admin-view active" id="view-dashboard">
+        <div class="stats-grid">
+          <div class="glass stat-card">
+            <div class="stat-card-top"><div class="stat-icon" style="background:#2563EB"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></div></div>
+            <div class="stat-value" id="dTotalFiles">0</div><div class="stat-label">Total Files</div>
+          </div>
+          <div class="glass stat-card">
+            <div class="stat-card-top"><div class="stat-icon" style="background:#16A34A"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg></div></div>
+            <div class="stat-value" id="dTotalDownloads">0</div><div class="stat-label">Total Downloads</div>
+          </div>
+          <div class="glass stat-card">
+            <div class="stat-card-top"><div class="stat-icon" style="background:#D97706"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div></div>
+            <div class="stat-value" id="dTodayUploads">0</div><div class="stat-label">Today's Uploads</div>
+          </div>
+          <div class="glass stat-card">
+            <div class="stat-card-top"><div class="stat-icon" style="background:#7C3AED"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M4 4h6l2 2h8v12H4z"/></svg></div></div>
+            <div class="stat-value" id="dTotalCats">0</div><div class="stat-label">Categories</div>
+          </div>
+          <div class="glass stat-card">
+            <div class="stat-card-top"><div class="stat-icon" style="background:#DB2777"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/></svg></div></div>
+            <div class="stat-value" id="dStorageUsed">0 B</div><div class="stat-label">Storage Used</div>
+          </div>
+        </div>
+
+        <div class="panel glass">
+          <div class="panel-head">
+            <h3>Recent Uploads</h3>
+            <a href="#" class="btn btn-outline btn-sm" data-view-link="files">View all</a>
+          </div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr><th>File</th><th>Category</th><th>Size</th><th>Uploaded</th><th>Downloads</th></tr></thead>
+              <tbody id="recentUploadsBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== Upload view ===== -->
+      <section class="admin-view" id="view-upload">
+        <div class="panel glass" style="max-width:640px">
+          <div class="panel-head"><h3>Upload a new file</h3></div>
+          <form id="uploadForm">
+            <div class="dropzone" id="dropzone">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M17 8l-5-5-5 5"/><path d="M12 3v12"/></svg>
+              <div><span class="browse-text">Click to browse</span> or drag &amp; drop</div>
+              <p>Any file type · up to 1 GB</p>
+              <input type="file" id="fileInput" hidden>
+            </div>
+            <div class="file-chosen" id="fileChosen">
+              <div class="file-icon" id="chosenIcon" style="width:38px;height:38px;font-size:.6rem">FILE</div>
+              <div style="flex:1;min-width:0">
+                <div class="name" id="chosenName">—</div>
+                <div class="size" id="chosenSize">—</div>
+              </div>
+              <button type="button" class="icon-btn" id="clearFile" aria-label="Remove file"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+            </div>
+
+            <div class="form-group" style="margin-top:18px">
+              <label for="uploadTitle">Title</label>
+              <input type="text" id="uploadTitle" class="form-control" placeholder="e.g. Chapter 3 Notes" required>
+            </div>
+            <div class="form-group">
+              <label for="uploadDesc">Description</label>
+              <textarea id="uploadDesc" class="form-control" placeholder="Briefly describe this file…"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="uploadCategory">Category</label>
+              <select id="uploadCategory" class="form-control"></select>
+            </div>
+
+            <div class="form-group pin-field-group">
+              <label for="uploadPin">Secure Access PIN <span class="hint">(6 digits — required to protect this file)</span></label>
+              <div class="pin-input-row">
+                <input type="password" id="uploadPin" class="form-control pin-text-input" inputmode="numeric" maxlength="6" placeholder="● ● ● ● ● ●" autocomplete="off">
+                <button type="button" class="icon-btn" id="togglePinVisibility" aria-label="Show PIN">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                </button>
+              </div>
+              <p class="hint">Digits only, exactly 6 characters. Visitors must enter this PIN before they can view or download this file.</p>
+            </div>
+            <div class="form-group pin-field-group">
+              <label for="uploadPinConfirm">Confirm PIN</label>
+              <input type="password" id="uploadPinConfirm" class="form-control pin-text-input" inputmode="numeric" maxlength="6" placeholder="● ● ● ● ● ●" autocomplete="off">
+            </div>
+
+            <div class="progress-wrap" id="progressWrap">
+              <div class="progress-bar-track"><div class="progress-bar-fill" id="progressFill"></div></div>
+              <div class="progress-label"><span id="progressText">Uploading…</span><span id="progressPct">0%</span></div>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block" id="uploadBtn" style="margin-top:18px">Upload File</button>
+          </form>
+        </div>
+      </section>
+
+      <!-- ===== Manage Files view ===== -->
+      <section class="admin-view" id="view-files">
+        <div class="panel glass">
+          <div class="panel-head">
+            <h3>Manage Files</h3>
+            <div style="display:flex;gap:10px">
+              <input type="text" id="manageSearch" class="form-control" placeholder="Search files…" style="width:220px">
+              <button class="btn btn-primary btn-sm" data-view-link="upload">+ Upload</button>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr><th>File</th><th>Category</th><th>Size</th><th>Uploaded</th><th>Downloads</th><th>Protection</th><th>Actions</th></tr></thead>
+              <tbody id="manageFilesBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== Categories view ===== -->
+      <section class="admin-view" id="view-categories">
+        <div class="panel glass">
+          <div class="panel-head">
+            <h3>Categories</h3>
+            <button class="btn btn-primary btn-sm" id="addCategoryBtn">+ New Category</button>
+          </div>
+          <div id="categoryAddRow" style="display:none;gap:10px;margin-bottom:18px" class="form-row">
+            <input type="text" id="newCategoryName" class="form-control" placeholder="Category name">
+            <div style="display:flex;gap:8px">
+              <button class="btn btn-primary" id="saveCategoryBtn">Save</button>
+              <button class="btn btn-outline" id="cancelCategoryBtn">Cancel</button>
+            </div>
+          </div>
+          <div class="category-grid" id="categoryGrid"></div>
+        </div>
+      </section>
+
+      <!-- ===== Settings view ===== -->
+      <section class="admin-view" id="view-settings">
+        <div class="settings-grid">
+          <div class="panel glass">
+            <div class="panel-head"><h3>Site Settings</h3></div>
+            <div class="form-group">
+              <label>Website name</label>
+              <input type="text" id="settingsName" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Logo</label>
+              <div style="display:flex;align-items:center;gap:14px">
+                <img id="logoPreview" class="logo-preview" src="" alt="Logo preview">
+                <input type="file" id="logoInput" accept="image/*" hidden>
+                <button type="button" class="btn btn-outline btn-sm" id="logoBtn">Change logo</button>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Theme</label>
+              <div class="theme-toggle-row">
+                <div class="theme-option" data-theme-option="light">☀️ Light</div>
+                <div class="theme-option" data-theme-option="dark">🌙 Dark</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Primary color</label>
+              <div class="color-swatches" id="colorSwatches"></div>
+            </div>
+            <button class="btn btn-primary" id="saveSettingsBtn" style="margin-top:8px">Save Settings</button>
+          </div>
+
+          <div class="panel glass">
+            <div class="panel-head"><h3>Change Password</h3></div>
+            <div class="form-group">
+              <label>Current password</label>
+              <input type="password" id="currentPw" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>New password</label>
+              <input type="password" id="newPw" class="form-control">
+              <p class="hint">At least 6 characters.</p>
+            </div>
+            <button class="btn btn-primary" id="changePwBtn">Update Password</button>
+          </div>
+
+          <div class="panel glass" style="grid-column:1/-1">
+            <div class="panel-head">
+              <h3>File Access PINs</h3>
+              <span class="badge">Per-file</span>
+            </div>
+            <p style="color:var(--text-muted);font-size:.86rem;line-height:1.6">
+              Every file is protected by its own 6-digit PIN, set when it's uploaded. Visitors must enter a file's PIN before they can view or download it — go to <a href="#" data-view-link="files" style="color:var(--primary);font-weight:600">Manage Files</a> to change a file's PIN or see which files are protected.
+            </p>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div>
+
+<!-- Edit file modal -->
+<div class="modal-overlay" id="editModal">
+  <div class="modal-box glass" style="max-width:480px">
+    <div class="modal-head"><h3>Edit File</h3><button class="icon-btn" id="editModalClose"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+    <div class="modal-body">
+      <input type="hidden" id="editFileId">
+      <div class="form-group"><label>Title</label><input type="text" id="editTitle" class="form-control"></div>
+      <div class="form-group"><label>Description</label><textarea id="editDesc" class="form-control"></textarea></div>
+      <div class="form-group"><label>Category</label><select id="editCategory" class="form-control"></select></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-outline btn-block" id="editCancelBtn">Cancel</button>
+      <button class="btn btn-primary btn-block" id="editSaveBtn">Save Changes</button>
+    </div>
+  </div>
+</div>
+
+<!-- Change PIN modal -->
+<div class="modal-overlay" id="changePinModal">
+  <div class="modal-box glass" style="max-width:420px">
+    <div class="modal-head"><h3>Change Access PIN</h3><button class="icon-btn" id="changePinModalClose"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+    <div class="modal-body">
+      <input type="hidden" id="changePinFileId">
+      <p style="color:var(--text-muted);font-size:.85rem;margin-bottom:16px">Set a new 6-digit PIN for "<span id="changePinFileTitle"></span>". The old PIN will stop working immediately, and anyone who unlocked this file this session will need to re-enter the new PIN.</p>
+      <div class="form-group">
+        <label for="newPinValue">New 6-digit PIN</label>
+        <input type="text" id="newPinValue" class="form-control" inputmode="numeric" maxlength="6" placeholder="● ● ● ● ● ●">
+      </div>
+      <div class="form-group">
+        <label for="confirmPinValue">Confirm PIN</label>
+        <input type="text" id="confirmPinValue" class="form-control" inputmode="numeric" maxlength="6" placeholder="● ● ● ● ● ●">
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-outline btn-block" id="changePinCancelBtn">Cancel</button>
+      <button class="btn btn-primary btn-block" id="changePinSaveBtn">Update PIN</button>
+    </div>
+  </div>
+</div>
+
+<!-- Confirm delete modal -->
+<div class="modal-overlay confirm-modal" id="confirmModal">
+  <div class="modal-box glass">
+    <div class="modal-body" style="text-align:center;padding-top:30px">
+      <div class="confirm-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6h14z"/></svg></div>
+      <h3 id="confirmTitle">Delete this item?</h3>
+      <p id="confirmMessage" style="color:var(--text-muted);font-size:.88rem;margin-top:6px">This action cannot be undone.</p>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-outline btn-block" id="confirmCancelBtn">Cancel</button>
+      <button class="btn btn-danger btn-block" id="confirmOkBtn">Delete</button>
+    </div>
+  </div>
+</div>
+
+<script src="./js/common.js"></script>
+<script src="./js/admin.js"></script>
+</body>
+</html>
