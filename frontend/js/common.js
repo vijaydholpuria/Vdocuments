@@ -11,7 +11,7 @@
    there regardless of this flag.
    ========================================================================== */
 
-const API_BASE = "http://127.0.0.1:5000/api";
+const API_BASE = "https://vdoc-backend-zhvi.onrender.com/api";
 
 const Auth = {
   ADMIN_KEY: "vdoc_admin",
